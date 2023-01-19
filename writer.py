@@ -3,6 +3,9 @@ from scraper import ProductData
 import openpyxl
 from datetime import datetime
 FILENAME = 'Data.xlsx'
+GREEN = '000000FF'
+RED = '00FF0000'
+BLUE = '0000FF00'
 def write_data(data:list[ProductData])->None:
     date = datetime.today().strftime('%Y-%m-%d')
 
@@ -19,4 +22,11 @@ def write_data(data:list[ProductData])->None:
         if info.state == "A":
             row[0].value = info.price
             row[1].value = info.count
+            ws.cell(column = 3,row = row[0].row).fill = openpyxl.styles.fills.PatternFill(patternType='solid', fgColor= openpyxl.styles.colors.Color(rgb=GREEN))
+            ws.cell(column = 1,row = row[0].row).value = info.name
+        elif info.state == "B":
+            ws.cell(column = 3,row = row[0].row).fill = openpyxl.styles.fills.PatternFill(patternType='solid', fgColor= openpyxl.styles.colors.Color(rgb=RED))
+        else:
+            ws.cell(column = 3,row = row[0].row).fill = openpyxl.styles.fills.PatternFill(patternType='solid', fgColor= openpyxl.styles.colors.Color(rgb=BLUE))
+        ws.cell(column = 3,row = row[0].row).value = info.state
     wb.save(FILENAME)

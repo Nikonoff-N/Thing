@@ -9,7 +9,7 @@ def get_column_count()->int:
     return len(df.columns)
 def get_all()->list:
     df = pd.read_excel(FILENAME, sheet_name='Data')
-    results = [row[1] if row[2]=="A" else None  for index, row in df[1:].iterrows()]
+    results = [row  for index, row in df[1:].iterrows()]
     return results        
 def get_active()->list:
     df = pd.read_excel(FILENAME, sheet_name='Data')

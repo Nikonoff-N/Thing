@@ -25,6 +25,9 @@ def get_info(url:str)->ProductData:
         tuple: current price,count and name
     """
     r = requests.get(url)
+    print(f"{url}-{r.status_code}")
+    if r.status_code == 404:
+        return ProductData(None,None,None,"B")
     soup = BeautifulSoup(r.text, 'html.parser')
     try:
         price = soup.find_all("span", {"class":'ordering__value'})[0]
