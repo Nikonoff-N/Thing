@@ -3,7 +3,10 @@ from scraper import get_info,ProductData
 from writer import write_data
 import sys
 from time import sleep
-timeout = int(sys.argv[1])
+try:
+    timeout = int(sys.argv[1])
+except:
+    timeout = 0
 active = get_all()
 data = []
 for row in active:
